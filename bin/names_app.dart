@@ -6,14 +6,16 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
 import 'package:names_app/names_app.dart' as names_app;
-
 void main(List<String> arguments) async {
+  print("Enter name:");
+  var name = stdin.readLineSync();
+  print("Name: ${name}");
   final db = sqlite3.open('db/database.db');
   createTables(db);
   final url = Uri.https(
     'api.genderize.io',
     '',
-    {'name': 'sasha'}
+    {'name': name}
   );
   final response = await http.get(url);
   if (response.statusCode == 200) {
